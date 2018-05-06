@@ -82,18 +82,15 @@ class Mysql extends Builder
     /**
      * 字段和表名处理
      * @access protected
-     * @param mixed  $key
+     * @param string $key
      * @param array  $options
      * @return string
      */
     protected function parseKey($key, $options = [], $strict = false)
     {
-        if (is_numeric($key)) {
+        if (is_int($key)) {
             return $key;
-        } elseif ($key instanceof Expression) {
-            return $key->getValue();
         }
-
         $key = trim($key);
         if (strpos($key, '$.') && false === strpos($key, '(')) {
             // JSON字段支持

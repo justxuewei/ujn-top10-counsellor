@@ -4,20 +4,65 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "702ac59ddc0b038e1a685405944ef7b8",
+    "content-hash": "2521f8e5169b8cb455f232079277812e",
     "packages": [
         {
-            "name": "topthink/framework",
-            "version": "v5.0.16",
+            "name": "aferrandini/phpqrcode",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/top-think/framework.git",
-                "reference": "e6b7e87586ca86777317ec54c32eaf4e8d2bf211"
+                "url": "https://github.com/aferrandini/PHPQRCode.git",
+                "reference": "3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/top-think/framework/e6b7e87586ca86777317ec54c32eaf4e8d2bf211.zip",
-                "reference": "e6b7e87586ca86777317ec54c32eaf4e8d2bf211",
+                "url": "https://files.phpcomposer.com/files/aferrandini/PHPQRCode/3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46.zip",
+                "reference": "3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPQRCode": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ariel Ferrandini",
+                    "email": "arielferrandini@gmail.com",
+                    "homepage": "http://www.ferrandini.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHPQRCode porting and changed for PHP 5.3 compatibility",
+            "homepage": "https://github.com/aferrandini/PHPQRCode",
+            "keywords": [
+                "barcode",
+                "php",
+                "qrcode"
+            ],
+            "abandoned": "endroid/qr-code",
+            "time": "2013-07-08T09:39:08+00:00"
+        },
+        {
+            "name": "topthink/framework",
+            "version": "v5.0.19",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/top-think/framework.git",
+                "reference": "c6e263be4b846848900b84514dfedae16a082626"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/top-think/framework/c6e263be4b846848900b84514dfedae16a082626.zip",
+                "reference": "c6e263be4b846848900b84514dfedae16a082626",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +100,7 @@
                 "orm",
                 "thinkphp"
             ],
-            "time": "2018-03-26T07:06:09+00:00"
+            "time": "2018-04-26T03:08:28+00:00"
         },
         {
             "name": "topthink/think-captcha",
@@ -251,16 +296,16 @@
         },
         {
             "name": "topthink/think-mongo",
-            "version": "v1.8.2",
+            "version": "v1.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-mongo.git",
-                "reference": "5433e971b4892b09cbec49090c690f5d4350a981"
+                "reference": "4ea4eaf8d7dc272122e124c6e795b3b5badb30ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/top-think/think-mongo/5433e971b4892b09cbec49090c690f5d4350a981.zip",
-                "reference": "5433e971b4892b09cbec49090c690f5d4350a981",
+                "url": "https://files.phpcomposer.com/files/top-think/think-mongo/4ea4eaf8d7dc272122e124c6e795b3b5badb30ab.zip",
+                "reference": "4ea4eaf8d7dc272122e124c6e795b3b5badb30ab",
                 "shasum": ""
             },
             "type": "library",
@@ -281,20 +326,20 @@
                 }
             ],
             "description": "mongodb driver for thinkphp5",
-            "time": "2018-01-30T07:12:02+00:00"
+            "time": "2018-04-01T11:14:58+00:00"
         },
         {
             "name": "topthink/think-queue",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-queue.git",
-                "reference": "ad709611d516e13d6760234bc98e91faa901cae8"
+                "reference": "465320c9cb7811df22d4ff8f29f58ead7d104348"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/top-think/think-queue/ad709611d516e13d6760234bc98e91faa901cae8.zip",
-                "reference": "ad709611d516e13d6760234bc98e91faa901cae8",
+                "url": "https://files.phpcomposer.com/files/top-think/think-queue/465320c9cb7811df22d4ff8f29f58ead7d104348.zip",
+                "reference": "465320c9cb7811df22d4ff8f29f58ead7d104348",
                 "shasum": ""
             },
             "require": {
@@ -326,7 +371,7 @@
                 }
             ],
             "description": "The ThinkPHP5 Queue Package",
-            "time": "2017-06-25T00:49:56+00:00"
+            "time": "2018-05-04T05:29:53+00:00"
         }
     ],
     "packages-dev": [],

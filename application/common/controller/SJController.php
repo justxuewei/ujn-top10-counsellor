@@ -9,11 +9,11 @@
 namespace app\common\controller;
 
 
-use app\code\model\InvitationCodeModel;
+use think\Config;
 use think\Controller;
-use think\exception\DbException;
 use think\exception\HttpResponseException;
 use think\Request;
+use think\Response;
 
 class SJController extends Controller {
 
@@ -35,42 +35,21 @@ class SJController extends Controller {
         // 邀请码验证
         $this->_codeValidation();
 
-        if (empty($this->code)) {
-            if ($this->errorMsg) {
-                $this->error(['code' => 10001, 'msg' => '登录失败'], $this->errorMsg);
-            } else {
-                $this->error(['code' => 10001, 'msg' => '登录失败']);
-            }
-        }
+        // 初始化
+        $this->_initialize();
+
+    }
+
+    /**
+     * 初始化
+     */
+    protected function _initialize() {
     }
 
     /**
      * 代码验证
      */
-    private function _codeValidation() {
-        $code = $this->request->header('SJ-Code');
-
-        if (empty($code)) {
-            $this->errorMsg = "传入参数不正确";
-            return;
-        }
-
-        // 从数据库中获取邀请码
-        try {
-            $mCode = InvitationCodeModel::get($code);
-            if (empty($mCode)) {
-                $this->errorMsg = "邀请码不存在";
-                return;
-            }
-            if ($mCode['is_confirm'] == 1) {
-                $this->errorMsg = "邀请码已过期";
-                return;
-            }
-            $this->code = $code;
-        } catch (DbException $e) {
-            $this->error($e->getMessage());
-        }
-
+    protected function _codeValidation() {
     }
 
     /**
@@ -81,20 +60,19 @@ class SJController extends Controller {
      * @param array $header 发送的Header信息
      * @return void
      */
-    protected function success($msg = '', $data = '', array $header = [])
-    {
-        $code   = 1;
+    protected function jSuccess($data = '', $msg = '成功', array $header = []) {
+        $code = 1;
         $result = [
             'code' => $code,
-            'msg'  => $msg,
+            'msg' => $msg,
             'data' => $data,
         ];
 
-        $type                                   = $this->getResponseType();
-        $header['Access-Control-Allow-Origin']  = '*';
+        $type = $this->getResponseType();
+        $header['Access-Control-Allow-Origin'] = '*';
         $header['Access-Control-Allow-Headers'] = 'X-Requested-With,Content-Type,XX-Device-Type,XX-Token';
         $header['Access-Control-Allow-Methods'] = 'GET,POST,PATCH,PUT,DELETE,OPTIONS';
-        $response                               = Response::create($result, $type)->header($header);
+        $response = Response::create($result, $type)->header($header);
         throw new HttpResponseException($response);
     }
 
@@ -106,25 +84,33 @@ class SJController extends Controller {
      * @param array $header 发送的Header信息
      * @return void
      */
-    protected function error($msg = '', $data = '', array $header = [])
-    {
+    protected function jError($data = '', $msg = '失败', array $header = []) {
         $code = 0;
         if (is_array($msg)) {
             $code = $msg['code'];
-            $msg  = $msg['msg'];
+            $msg = $msg['msg'];
         }
         $result = [
             'code' => $code,
-            'msg'  => $msg,
+            'msg' => $msg,
             'data' => $data,
         ];
 
-        $type                                   = $this->getResponseType();
-        $header['Access-Control-Allow-Origin']  = '*';
+        $type = $this->getResponseType();
+        $header['Access-Control-Allow-Origin'] = '*';
         $header['Access-Control-Allow-Headers'] = 'X-Requested-With,Content-Type,XX-Device-Type,XX-Token';
         $header['Access-Control-Allow-Methods'] = 'GET,POST,PATCH,PUT,DELETE,OPTIONS';
-        $response                               = Response::create($result, $type)->header($header);
+        $response = Response::create($result, $type)->header($header);
         throw new HttpResponseException($response);
+    }
+
+    /**
+     * 获取当前的response 输出类型
+     * @access protected
+     * @return string
+     */
+    protected function getResponseType() {
+        return Config::get('default_return_type');
     }
 
 }

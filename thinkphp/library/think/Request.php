@@ -1342,18 +1342,14 @@ class Request
     /**
      * 当前请求的host
      * @access public
-     * @param bool $strict  true 仅仅获取HOST
      * @return string
      */
-    public function host($strict = false)
+    public function host()
     {
         if (isset($_SERVER['HTTP_X_REAL_HOST'])) {
-            $host = $_SERVER['HTTP_X_REAL_HOST'];
-        } else {
-            $host = $this->server('HTTP_HOST');
+            return $_SERVER['HTTP_X_REAL_HOST'];
         }
-
-        return true === $strict && strpos($host, ':') ? strstr($host, ':', true) : $host;
+        return $this->server('HTTP_HOST');
     }
 
     /**

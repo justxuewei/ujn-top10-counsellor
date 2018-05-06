@@ -545,9 +545,7 @@ abstract class Builder
                 list($table, $type, $on) = $item;
                 $condition               = [];
                 foreach ((array) $on as $val) {
-                    if ($val instanceof Expression) {
-                        $condition[] = $val->getValue();
-                    } elseif (strpos($val, '=')) {
+                    if (strpos($val, '=')) {
                         list($val1, $val2) = explode('=', $val, 2);
                         $condition[]       = $this->parseKey($val1, $options) . '=' . $this->parseKey($val2, $options);
                     } else {
