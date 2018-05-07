@@ -25,7 +25,6 @@ class SJController extends Controller {
     protected $errorMsg;
 
     public function __construct(Request $request = null) {
-        parent::__construct($request);
         if (is_null($request)) {
             $request = Request::instance();
         }
@@ -35,8 +34,7 @@ class SJController extends Controller {
         // 邀请码验证
         $this->_codeValidation();
 
-        // 初始化
-        $this->_initialize();
+        parent::__construct($request);
 
     }
 

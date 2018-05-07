@@ -9,6 +9,7 @@
 namespace app\code\controller;
 
 
+use app\code\model\InvitationCode;
 use app\common\controller\SJController;
 use PHPQRCode\QRcode;
 use think\Config;
@@ -21,6 +22,7 @@ class Generate extends SJController {
      *
      * psw 密码
      * type 权限
+     * num 数量
      */
     public function index() {
 
@@ -29,25 +31,48 @@ class Generate extends SJController {
         $password = Config::get('psw');
         $validate = new Validate([
             'psw|口令' => "require|/^$password$/",
-            'type|权限' => "require|in:0,1,2"
+            'type|权限' => "require|in:0,1,2,3",
+            'num|数量' => 'number'
         ]);
 
         if (!$validate->check($param)) {
             $this->jError($validate->getError());
         }
 
-        $code = $this->_generateInvitationCode();
+        $num = null;
+        if (empty($param['num']) || $param['num'] < 0) {
+            $num = 1;
+        } else {
+            $num = $param['num'];
+        }
 
-        // TODO: 存入数据库
+        $ret = [];
 
-        // TODO: 记得换URL
-        $url = "http://" . $this->request->host()."/grading?code=$code";
-        $savePath = Config::get('upload_path')."$code.png";
-        QrCode::png($url, $savePath, 'L', 6, 2);
+        for ($i = 0; $i < $num; $i++) {
+            $code = $this->_generateInvitationCode();
 
-        $this->jSuccess([
-            'code' => $code,
-            'code_path' => "http://" . $this->request->host() . "/" . Config::get('qr_code_file_path') . "/$code.png"]);
+            // 将授权码存入数据库
+            InvitationCode::create([
+                'i_code' => $code,
+                'role' => $param['type'],
+                'create_time' => time()
+            ]);
+
+            $url = "http://" . $this->request->host()."/info?code=$code";
+            $savePath = Config::get('upload_path')."$code.png";
+            // 如果文件夹不存在则创建
+            if (!is_dir(Config::get('upload_path'))) {
+                mkdir(Config::get('upload_path'), 0777, true);
+            }
+            QrCode::png($url, $savePath, 'L', 6, 2);
+
+            $data = [
+                'code' => $code,
+                'code_path' => "http://" . $this->request->host() . "/" . Config::get('qr_code_file_path') . "/$code.png"];
+            array_push($ret, $data);
+        }
+
+        $this->jSuccess($ret);
     }
 
     /**

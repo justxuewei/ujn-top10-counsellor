@@ -10,9 +10,12 @@ namespace app\code\model;
 
 
 use think\Model;
+use traits\model\SoftDelete;
 
-class InvitationCodeModel extends Model {
+class InvitationCode extends Model {
 
-    protected $pk = "code";
+    use SoftDelete;
+
+    protected $pk = "i_code";
 
 }

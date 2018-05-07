@@ -5,3 +5,4 @@ application/config.php
 application/database.php
 .gitignore
 upload/
+config.php
