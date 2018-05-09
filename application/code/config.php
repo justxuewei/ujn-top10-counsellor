@@ -8,6 +8,7 @@
 
 return [
     'psw' => 'SJExcVMNbauTzDRx',
-    'upload_path' => ROOT_PATH . "public/upload/",
-    'qr_code_file_path' => 'upload'
+    'upload_path' => "upload",
+    'qr_code_entrance' => 'http://sj.ujnxgzx.com/fe',     // 二维码扫描入口，后端自动加入邀请码http://sj.ujnxgzx.com/fe?code=xxxxxx
+    'code_length' => 6      // 二维码长度
 ];

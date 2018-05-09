@@ -49,7 +49,7 @@ class Generate extends SJController {
         $ret = [];
 
         for ($i = 0; $i < $num; $i++) {
-            $code = $this->_generateInvitationCode();
+            $code = $this->_generateInvitationCode(Config::get('code_length'));
 
             // 将授权码存入数据库
             InvitationCode::create([
@@ -58,8 +58,8 @@ class Generate extends SJController {
                 'create_time' => time()
             ]);
 
-            $url = "http://" . $this->request->host()."/info?code=$code";
-            $savePath = Config::get('upload_path')."$code.png";
+            $url = Config::get('qr_code_entrance')."?code=$code";
+            $savePath = ROOT_PATH . "public". DS .Config::get('upload_path'). DS ."$code.png";
             // 如果文件夹不存在则创建
             if (!is_dir(Config::get('upload_path'))) {
                 mkdir(Config::get('upload_path'), 0777, true);
@@ -68,7 +68,7 @@ class Generate extends SJController {
 
             $data = [
                 'code' => $code,
-                'code_path' => "http://" . $this->request->host() . "/" . Config::get('qr_code_file_path') . "/$code.png"];
+                'code_path' => "http://" . $this->request->host() . "/" . Config::get('upload_path') . "/$code.png"];
             array_push($ret, $data);
         }
 

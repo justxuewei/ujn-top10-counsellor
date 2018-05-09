@@ -1,8 +1,12 @@
 # Created by .ignore support plugin (hsz.mobi)
-.DS_Store
 .idea/
 application/config.php
 application/database.php
 .gitignore
-upload/
-config.php
+public/upload/
+application/grading/config.php
+application/code/config.php
+application/common/config.php
+application/statistics/config.php
+application/.DS_Store
+.DS_Store
