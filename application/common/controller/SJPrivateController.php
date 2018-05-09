@@ -37,7 +37,6 @@ class SJPrivateController extends SJController {
      */
     protected function _codeValidation() {
         $code = $this->request->header('SJ-Code');
-        echo 1;
 
         if (empty($code)) {
             $this->errorMsg = "传入参数不正确";
