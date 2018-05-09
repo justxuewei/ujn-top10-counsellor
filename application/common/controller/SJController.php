@@ -25,6 +25,7 @@ class SJController extends Controller {
     protected $errorMsg;
 
     public function __construct(Request $request = null) {
+        echo 0;
         if (is_null($request)) {
             $request = Request::instance();
         }
