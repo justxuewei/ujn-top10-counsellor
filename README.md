@@ -10,18 +10,10 @@
     - 在总配置文件中配置系统开启时间和截止时间
 - 需要自行创建:
 
-    - 打分配置文件，目录`application/grading/config.php`
     - 邀请码配置文件，目录`application/code/config.php`
     - 统计配置文件，目录`application/statistics/config.php`
     
 ```
-/** 打分配置文件 **/
-<?php
-return [
-    // 默认候选人图像
-    'default_candidate_pic' => 'http://xxx.png'
-];
-
 /** 邀请码配置文件 **/
 <?php
 return [

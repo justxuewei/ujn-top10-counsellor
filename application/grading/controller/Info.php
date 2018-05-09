@@ -33,7 +33,7 @@ class Info extends SJPrivateController {
                 $can['school'] = $candidate['c_school'];
                 $can['profile'] = $candidate['c_profile'];
                 if (empty($candidate['c_pic'])) {
-                    $can['pic'] = Config::get('default_candidate_pic');
+                    $can['pic'] = "http://res.niuxuewei.com/2018-05-09-123553.jpg";
                 } else {
                     $can['pic'] = $candidate['c_pic'];
                 }

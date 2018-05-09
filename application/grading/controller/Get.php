@@ -43,7 +43,7 @@ class Get extends SJController {
             $v['school'] = $vote['c_school'];
             $v['profile'] = $vote['c_profile'];
             if (empty($vote['c_pic'])) {
-                $v['pic'] = Config::get('default_candidate_pic');
+                $v['pic'] = "http://res.niuxuewei.com/2018-05-09-123553.jpg";
             } else {
                 $v['pic'] = $vote['c_pic'];
             }
