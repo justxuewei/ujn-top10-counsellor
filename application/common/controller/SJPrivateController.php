@@ -22,8 +22,7 @@ class SJPrivateController extends SJController {
         $startAt = strtotime(Config::get('start_at'));
         if (time() < $startAt) $this->jError('系统未开放');
         $endAt = strtotime(Config::get('end_at'));
-//        echo Config::get('end_at');
-//        if (time() > $endAt) $this->jError('系统已关闭');
+        if (time() > $endAt) $this->jError('系统已关闭');
         if (empty($this->code)) {
             if ($this->errorMsg) {
                 $this->jError($this->errorMsg, ['code' => $this->statusCode, 'msg' => '登录失败']);

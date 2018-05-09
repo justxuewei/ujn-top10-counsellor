@@ -7,23 +7,14 @@
 - 在部署服务器中将`./application/config.php.tmp`和`./application/database.php.tmp`的后缀`.tmp`去除，并根据实际需要自行修改参数。其中需要注意的是：
     - 在数据库配置文件中检查数据库配置和数据库前缀
     - 在总配置文件中需要将`default_return_type`设置为`json`
+    - 在总配置文件中配置系统开启时间和截止时间
 - 需要自行创建:
 
-    - 公共配置文件，目录`application/common/config.php`
     - 打分配置文件，目录`application/grading/config.php`
     - 邀请码配置文件，目录`application/code/config.php`
     - 统计配置文件，目录`application/statistics/config.php`
     
 ```
-/** 公共配置文件 **/
-<?php
-return [
-    // 系统开始时间
-    'start_at' => '2018-01-01 00:00:00',
-    // 系统结束时间
-    'end_at' => '2018-12-30 23:59:59'
-];
-
 /** 打分配置文件 **/
 <?php
 return [

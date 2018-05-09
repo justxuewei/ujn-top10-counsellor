@@ -2,11 +2,9 @@
 .idea/
 application/config.php
 application/database.php
-.gitignore
 public/upload/
 application/grading/config.php
 application/code/config.php
-application/common/config.php
 application/statistics/config.php
 application/.DS_Store
 .DS_Store

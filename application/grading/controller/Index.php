@@ -75,9 +75,6 @@ class Index extends SJPrivateController {
             $votes = $voteModel->where('i_code', $this->getCode())->select();
             // 获取全部候选人
             $candidates = Candidate::all();
-            if (count($votes) != count($candidates)) {
-                $this->jError('候选人分数不完整，请检查您是否为每一位候选人都填入了分数'.'(code: 000003)');
-            }
             foreach ($candidates as $candidate) {
                 $cid = $candidate['id'];
                 $flag = false;
@@ -87,7 +84,7 @@ class Index extends SJPrivateController {
                         break;
                     }
                 }
-                if (!$flag) $this->jError('候选人分数不完整，请检查您是否为每一位候选人都填入了分数'.'(code: 000004)');
+                if (!$flag) $this->jError('请您为候选人'.$candidate['c_name'].'打分后再次提交，谢谢！'.'[code: 000004]');
             }
 
             $invitationCode = InvitationCode::get($this->getCode());
