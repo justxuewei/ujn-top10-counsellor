@@ -27,6 +27,7 @@ return [
 return [
     'psw' => 'SJExcVMNbauTzDRx',    // 生成二维码密码
     'upload_path' => "upload",  // 二维码保存目录，为ROOT_PATH/public/upload
+    'qr_code_image_url_path' => "be/public/upload", // 二维码url访问目录
     'qr_code_entrance' => 'http://sj.ujnxgzx.com/fe',     // 二维码扫描入口，后端自动加入邀请码http://sj.ujnxgzx.com/fe?code=xxxxxx
     'code_length' => 6      // 二维码长度
 ];

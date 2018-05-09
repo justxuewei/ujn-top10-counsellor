@@ -68,7 +68,7 @@ class Generate extends SJController {
 
             $data = [
                 'code' => $code,
-                'code_path' => "http://" . $this->request->host() . "/" . Config::get('upload_path') . "/$code.png"];
+                'code_path' => "http://" . $this->request->host() . "/" . Config::get('qr_code_image_url_path') . "/$code.png"];
             array_push($ret, $data);
         }
 
