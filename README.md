@@ -9,7 +9,7 @@
     - 在总配置文件中需要将`default_return_type`设置为`json`
 - 需要自行创建:
 
-    - 公共配置文件，目录`application/common/config/php`
+    - 公共配置文件，目录`application/common/config.php`
     - 打分配置文件，目录`application/grading/config.php`
     - 邀请码配置文件，目录`application/code/config.php`
     - 统计配置文件，目录`application/statistics/config.php`
