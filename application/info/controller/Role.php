@@ -6,7 +6,7 @@
  * Time: 2:05 AM
  */
 
-namespace app\info;
+namespace app\info\controller;
 
 
 use app\common\controller\SJPrivateController;
