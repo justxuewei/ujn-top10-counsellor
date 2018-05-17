@@ -10,6 +10,7 @@ namespace app\info\controller;
 
 
 use app\common\controller\SJController;
+use think\Db;
 use think\Validate;
 
 class Grading extends SJController {
