@@ -10,7 +10,6 @@ namespace app\grading\controller;
 
 
 use app\common\controller\SJController;
-use think\Config;
 use think\Db;
 use think\Validate;
 
@@ -38,6 +37,7 @@ class Get extends SJController {
         $ret = [];
         foreach ($votes as $vote) {
             $v = [];
+            $v['id'] = $vote['id'];
             $v['score'] = $vote['score'];
             $v['name'] = $vote['c_name'];
             $v['school'] = $vote['c_school'];
