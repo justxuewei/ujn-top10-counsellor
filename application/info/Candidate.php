@@ -1,29 +1,28 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: xgzx
- * Date: 2018/5/7
- * Time: 10:02
+ * User: MrN1u
+ * Date: 5/18/18
+ * Time: 2:06 AM
  */
 
-namespace app\grading\controller;
+namespace app\info;
 
 
-use app\common\controller\SJPrivateController;
-use app\grading\model\Candidate;
+use app\common\controller\SJController;
 use app\grading\model\GradingTitle;
-use think\Config;
 use think\exception\DbException;
+use app\grading\model\Candidate as CandidateModel;
 
-class Info extends SJPrivateController {
+class Candidate extends SJController {
 
     /**
      * [GET] 获取全部候选人以及题目信息
      */
-    public function index() {
+    public function getAll() {
         try {
             // 获取全部候选人
-            $candidateModel = new Candidate();
+            $candidateModel = new CandidateModel();
             $candidates = $candidateModel->order('id')->select();
             $ret_candidates = [];
             foreach ($candidates as $candidate) {
@@ -57,15 +56,6 @@ class Info extends SJPrivateController {
             $this->jError($e->getMessage());
         }
 
-    }
-
-    /**
-     * [GET] 获取用户角色
-     */
-    public function getRole() {
-        $this->jSuccess([
-            'role' => $this->role
-        ]);
     }
 
 }

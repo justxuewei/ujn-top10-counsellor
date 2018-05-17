@@ -1,26 +1,24 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: xgzx
- * Date: 2018/5/7
- * Time: 15:12
+ * User: MrN1u
+ * Date: 5/18/18
+ * Time: 2:09 AM
  */
 
-namespace app\grading\controller;
+namespace app\info;
 
 
 use app\common\controller\SJController;
-use think\Db;
-use think\Validate;
 
-class Get extends SJController {
+class Grading extends SJController {
 
     /**
      * [GET] 获取历史打分记录
      *
      * c 邀请码
      */
-    public function index() {
+    public function getAll() {
 
         $param = $this->request->get();
 
