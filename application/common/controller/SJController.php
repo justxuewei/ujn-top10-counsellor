@@ -96,7 +96,7 @@ class SJController extends Controller {
 
         $type = $this->getResponseType();
         $header['Access-Control-Allow-Origin'] = '*';
-        $header['Access-Control-Allow-Headers'] = 'X-Requested-With,Content-Type,XX-Device-Type,XX-Token';
+        $header['Access-Control-Allow-Headers'] = 'X-Requested-With,Content-Type,XX-Device-Type,XX-Token,SJ-Code';
         $header['Access-Control-Allow-Methods'] = 'GET,POST,PATCH,PUT,DELETE,OPTIONS';
         $response = Response::create($result, $type)->header($header);
         throw new HttpResponseException($response);
