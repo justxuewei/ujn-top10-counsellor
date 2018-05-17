@@ -59,4 +59,13 @@ class Info extends SJPrivateController {
 
     }
 
+    /**
+     * [GET] 获取用户角色
+     */
+    public function getRole() {
+        $this->jSuccess([
+            'role' => $this->role
+        ]);
+    }
+
 }

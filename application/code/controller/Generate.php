@@ -29,9 +29,10 @@ class Generate extends SJController {
         $param = $this->request->param();
 
         $password = Config::get('psw');
+        $roleCheck = Config::get('role_check');
         $validate = new Validate([
             'psw|口令' => "require|/^$password$/",
-            'type|权限' => "require|in:0,1,2,3",
+            'type|权限' => "require|$roleCheck",    // 允许使用的权限
             'num|数量' => 'number'
         ]);
 

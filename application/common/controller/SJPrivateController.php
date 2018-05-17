@@ -15,7 +15,10 @@ use app\code\model\InvitationCode;
 
 class SJPrivateController extends SJController {
 
+    // 邀请码
     protected $code;
+    // 角色
+    protected $role;
     protected $statusCode = 10001;
 
     protected function _initialize() {
@@ -56,6 +59,7 @@ class SJPrivateController extends SJController {
                 return;
             }
             $this->code = $code;
+            $this->role = $mCode['role'];
         } catch (DbException $e) {
             $this->jError($e->getMessage());
         }
