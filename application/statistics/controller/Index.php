@@ -24,6 +24,9 @@ class Index extends SJController {
     public function index() {
         try {
             $candidates = Candidate::all();
+            if (!Config::has('role_weight')) {
+                $this->jError("配置选项'role_weight'不存在，错误代码0001000");
+            }
             $weight = Config::get('role_weight');
             $ret = [];
             foreach ($candidates as $candidate) {
@@ -40,6 +43,9 @@ class Index extends SJController {
                     continue;
                 }
                 $count = $count[0]['co'];
+                if (!Config::has('removal_ratio')) {
+                    $this->jError("配置选项'removal_ratio'不存在，错误代码0001001");
+                }
                 $removalRatio = Config::get('removal_ratio');
                 $removeCount = floor($count * $removalRatio);
                 $remainCount = $count - 2 * $removeCount;
