@@ -81,7 +81,7 @@ class Index extends SJController {
     }
 
     /**
-     * [GET] 返回完成情况
+     * [GET] 统计评分完成情况
      */
     public function completion() {
         $this->jSuccess([
