@@ -80,4 +80,13 @@ class Index extends SJController {
         }
     }
 
+    /**
+     * [GET] 返回完成情况
+     */
+    public function completion() {
+        $this->jSuccess([
+            'count' => Db::table('invitation_code')->where('is_confirm', 1)->count()
+        ]);
+    }
+
 }
