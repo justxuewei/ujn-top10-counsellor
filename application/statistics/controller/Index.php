@@ -85,7 +85,7 @@ class Index extends SJController {
      */
     public function completion() {
         $this->jSuccess([
-            'count' => Db::table('invitation_code')->where('is_confirm', 1)->count()
+            'count' => Db::name('invitation_code')->where('is_confirm', 1)->count()
         ]);
     }
 
