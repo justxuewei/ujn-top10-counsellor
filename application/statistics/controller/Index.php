@@ -27,58 +27,49 @@ class Index extends SJController {
             if (!Config::has('role_weight')) {
                 $this->jError("配置选项'role_weight'不存在，错误代码0001000");
             }
+            if (!Config::has('removal_ratio')) {
+                $this->jError("配置选项'removal_ratio'不存在，错误代码0001001");
+            }
             $weight = Config::get('role_weight');
+            $removalRatio = Config::get('removal_ratio');
             $ret = [];
             foreach ($candidates as $candidate) {
                 $cid = $candidate['id'];
-                // 获取全部得分
-                $count = Db::query("select count(0) co from sj_vote where candidate_id = $cid");
-                if (empty($count)) {
-                    array_push($ret, [
-                        'name' => $candidate['c_name'],
-                        'school' => $candidate['c_school'],
-                        'profile' => $candidate['c_profile'],
-                        'avg_score' => 0
-                    ]);
-                    continue;
-                }
-                $count = $count[0]['co'];
-                if (!Config::has('removal_ratio')) {
-                    $this->jError("配置选项'removal_ratio'不存在，错误代码0001001");
-                }
-                $removalRatio = Config::get('removal_ratio');
-                $removeCount = floor($count * $removalRatio);
-                $remainCount = $count - 2 * $removeCount;
-                $sql = "select
-                        v.score,
-                        ic.role
-                        from (
-                                select *
-                                from sj_vote
-                                where candidate_id = $cid and delete_time is null
-                                order by score
-                                limit $removeCount, $remainCount
-                              ) v
-                        left join sj_invitation_code ic on ic.i_code = v.i_code and ic.delete_time is null";
-                $scores = Db::query($sql);
-                // 计算平均分
-                $portionSum = [];
-                foreach ($weight as $role => $w) {
-                    $portionSum[$role] = [
-                        'sum' => 0.,
-                        'count' => 0,
-                    ];
-                }
-                foreach ($scores as $score) {
-                    $role = $score['role'];
-//                    $total += $score['score'] * $weight[$role];
-                    $portionSum[$role]['sum'] += $score['score'];
-                    $portionSum[$role]['count']++;
-                }
-                //统计
                 $avgScore = 0;
                 foreach ($weight as $role => $w) {
-                    $avgScore += $portionSum[$role]['sum'] / $portionSum[$role]['count'] * $weight[$role];
+                    // 获取全部得分
+                    $count = Db::query("select count(*) co
+                                                from (
+                                                  select *
+                                                  from sj_vote
+                                                  where candidate_id = $cid and delete_time is null
+                                                  order by score
+                                                ) v
+                                                left join sj_invitation_code ic on ic.i_code = v.i_code and ic.delete_time is null
+                                                where ic.role = $role"
+                    );
+                    if (empty($count)) {
+                        continue;
+                    }
+                    $count = $count[0]['co'];
+                    $removeCount = floor($count * $removalRatio);
+                    $remainCount = $count - 2 * $removeCount;
+                    $scores = Db::query("select v.score, ic.role
+                                                from (
+                                                  select *
+                                                  from sj_vote
+                                                  where candidate_id = $cid and delete_time is null
+                                                  order by score
+                                                ) v
+                                                left join sj_invitation_code ic on ic.i_code = v.i_code and ic.delete_time is null
+                                                where ic.role = $role
+                                                limit $removeCount, $remainCount
+                                             ");
+                    $total = 0;
+                    foreach ($scores as $score) {
+                        $total += $score['score'] * $weight[$role];
+                    }
+                    $avgScore += ($total / $remainCount);
                 }
                 array_push($ret, [
                     'name' => $candidate['c_name'],
