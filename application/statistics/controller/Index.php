@@ -61,17 +61,30 @@ class Index extends SJController {
                               ) v
                         left join sj_invitation_code ic on ic.i_code = v.i_code and ic.delete_time is null";
                 $scores = Db::query($sql);
-                $fCount = count($scores);
-                $total = 0;
+                // 计算平均分
+                $portionSum = [];
+                foreach ($weight as $role => $w) {
+                    $portionSum[$role] = [
+                        'sum' => 0.,
+                        'count' => 0,
+                    ];
+                }
                 foreach ($scores as $score) {
                     $role = $score['role'];
-                    $total += $score['score'] * $weight[$role];
+//                    $total += $score['score'] * $weight[$role];
+                    $portionSum[$role]['sum'] += $score['score'];
+                    $portionSum[$role]['count']++;
+                }
+                //统计
+                $avgScore = 0;
+                foreach ($weight as $role => $w) {
+                    $avgScore += $portionSum[$role]['sum'] / $portionSum[$role]['count'] * $weight[$role];
                 }
                 array_push($ret, [
                     'name' => $candidate['c_name'],
                     'school' => $candidate['c_school'],
                     'profile' => $candidate['c_profile'],
-                    'avg_score' => $total / $fCount
+                    'avg_score' => $avgScore
                 ]);
             }
             $this->jSuccess($ret);
