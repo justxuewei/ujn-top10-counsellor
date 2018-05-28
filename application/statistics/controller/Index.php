@@ -52,7 +52,7 @@ class Index extends SJController {
                         continue;
                     }
                     $count = $count[0]['co'];
-                    $removeCount = floor($count * $removalRatio);
+                    $removeCount = round($count * $removalRatio);
                     $remainCount = $count - 2 * $removeCount;
                     $scores = Db::query("select v.score, ic.role
                                                 from (
