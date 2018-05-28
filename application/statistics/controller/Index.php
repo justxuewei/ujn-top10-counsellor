@@ -48,7 +48,7 @@ class Index extends SJController {
                                                 left join sj_invitation_code ic on ic.i_code = v.i_code and ic.delete_time is null
                                                 where ic.role = $role"
                     );
-                    if (empty($count)) {
+                    if (empty($count) || $count[0]['co'] == 0) {
                         continue;
                     }
                     $count = $count[0]['co'];
