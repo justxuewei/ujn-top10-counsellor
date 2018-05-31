@@ -98,4 +98,29 @@ class Index extends SJPrivateController {
         }
     }
 
+    /**
+     * [GET] 确认提交v2
+     * 这是15进10的确认，每个人最多打分10个人
+     */
+    public function comfirmv2() {
+        $voteModel = new Vote();
+        $voteCount = $voteModel->where('i_code', $this->getCode())->where('score', 1)->count();
+
+        if ($voteCount > 10) {
+            $this->jError("您最多可以投10票，您目前选择了$voteCount 位辅导员，请核查后再次提交，谢谢！");
+        }
+
+        $invitationCode = null;
+        try  {
+            $invitationCode = InvitationCode::get($this->getCode());
+        } catch (DbException $e) {
+            $this->jError($e->getMessage()."(code: 000003)");
+        }
+        $invitationCode->save([
+            'is_confirm' => 1,
+            'confirm_time' => time()
+        ]);
+        $this->jSuccess();
+    }
+
 }
