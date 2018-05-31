@@ -106,6 +106,10 @@ class Index extends SJPrivateController {
         $voteModel = new Vote();
         $voteCount = $voteModel->where('i_code', $this->getCode())->where('score', 1)->count();
 
+        if ($voteCount < 1) {
+            $this->jError("请您至少选择一位候选人");
+        }
+
         if ($voteCount > 10) {
             $this->jError("您最多可以投10票，您目前选择了$voteCount 位辅导员，请核查后再次提交，谢谢！");
         }
