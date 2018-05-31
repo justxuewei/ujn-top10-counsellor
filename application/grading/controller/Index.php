@@ -102,7 +102,7 @@ class Index extends SJPrivateController {
      * [GET] 确认提交v2
      * 这是15进10的确认，每个人最多打分10个人
      */
-    public function comfirmv2() {
+    public function confirmv2() {
         $voteModel = new Vote();
         $voteCount = $voteModel->where('i_code', $this->getCode())->where('score', 1)->count();
 
