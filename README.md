@@ -50,5 +50,5 @@ return [
 ---
 
 作者: MrN1u<br>
-邮箱: a@niuxuewei.com<br>
-主页: http://www.niuxuewei.com
+邮箱: a@nxw.name<br>
+主页: http://www.nxw.name
