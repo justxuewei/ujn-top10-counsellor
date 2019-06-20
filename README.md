@@ -47,6 +47,6 @@ return [
 
 ---
 
-作者: MrN1u<br>
+作者: Xavier Niu<br>
 邮箱: a@nxw.name<br>
 主页: http://www.nxw.name
